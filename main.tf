@@ -23,6 +23,23 @@ module "enterprise_scale" {
   configure_management_resources = {
     settings = {
       log_analytics = {
+        config = {
+          enable_monitoring_for_arc                         = false
+          enable_monitoring_for_vm                          = true
+          enable_monitoring_for_vmss                        = true
+          enable_sentinel                                   = false
+          enable_solution_for_agent_health_assessment       = true
+          enable_solution_for_anti_malware                  = true
+          enable_solution_for_azure_activity                = true
+          enable_solution_for_change_tracking               = true
+          enable_solution_for_service_map                   = true
+          enable_solution_for_sql_advanced_threat_detection = false
+          enable_solution_for_sql_assessment                = false
+          enable_solution_for_sql_vulnerability_assessment  = false
+          enable_solution_for_updates                       = false
+          enable_solution_for_vm_insights                   = true
+          retention_in_days                                 = 30
+        }
         enabled = true
       }
       security_center = {
@@ -33,6 +50,66 @@ module "enterprise_scale" {
       }
     }
     tags = null
+  }
+
+  // Connectivity (hub network) configuration
+  deploy_connectivity_resources = true
+  configure_connectivity_resources = {
+    settings = {
+      dns = {
+        config = {
+          enable_private_dns_zone_virtual_network_link_on_hubs   = false
+          enable_private_dns_zone_virtual_network_link_on_spokes = false
+          enable_private_link_by_service = {
+            azure_app_configuration_stores       = false
+            azure_automation_dscandhybridworker  = false
+            azure_automation_webhook             = false
+            azure_backup                         = false
+            azure_cache_for_redis                = false
+            azure_container_registry             = false
+            azure_cosmos_db_cassandra            = false
+            azure_cosmos_db_gremlin              = false
+            azure_cosmos_db_mongodb              = false
+            azure_cosmos_db_sql                  = false
+            azure_cosmos_db_table                = false
+            azure_data_factory                   = false
+            azure_data_factory_portal            = false
+            azure_data_lake_file_system_gen2     = false
+            azure_database_for_mariadb_server    = false
+            azure_database_for_mysql_server      = false
+            azure_database_for_postgresql_server = false
+            azure_event_grid_domain              = false
+            azure_event_grid_topic               = false
+            azure_event_hubs_namespace           = false
+            azure_file_sync                      = false
+            azure_iot_hub                        = false
+            azure_key_vault                      = false
+            azure_kubernetes_service_management  = false
+            azure_machine_learning_workspace     = false
+            azure_monitor                        = false
+            azure_relay_namespace                = false
+            azure_search_service                 = false
+            azure_service_bus_namespace          = false
+            azure_site_recovery                  = false
+            azure_sql_database_sqlserver         = false
+            azure_synapse_analytics_sql          = false
+            azure_synapse_analytics_sqlserver    = false
+            azure_web_apps_sites                 = false
+            cognitive_services_account           = false
+            signalr                              = false
+            storage_account_blob                 = true
+            storage_account_file                 = false
+            storage_account_queue                = false
+            storage_account_table                = false
+            storage_account_web                  = false
+          }
+          location               = ""
+          private_dns_zones      = []
+          private_link_locations = []
+          public_dns_zones       = []
+        }
+      }
+    }
   }
   providers = {
     azurerm              = azurerm
@@ -47,10 +124,11 @@ module "hubnetworking" {
 
   hub_virtual_networks = {
     primary-hub = {
-      name                = "vnet-hub-${var.default_location}"
-      address_space       = [var.hub_virtual_network_address_prefix]
-      location            = var.default_location
-      resource_group_name = "rg-connectivity-${var.default_location}"
+      name                        = "vnet-hub-${var.default_location}"
+      address_space               = [var.hub_virtual_network_address_prefix]
+      location                    = var.default_location
+      resource_group_name         = "rg-connectivity-${var.default_location}"
+      resource_group_lock_enabled = false
       firewall = {
         subnet_address_prefix            = var.firewall_subnet_address_prefix
         management_subnet_address_prefix = var.firewall_management_subnet_address_prefix
