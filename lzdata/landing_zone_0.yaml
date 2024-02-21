@@ -1,0 +1,13 @@
+---
+name: lz0
+location: germanywestcentral
+billing_enrollment_account: 322580
+management_group_id: alz-online
+subscription_id: 5b8c9c20-9a06-40a3-a991-1ea166445e1b
+virtual_networks:
+  vnet1:
+    name: lz0
+    address_space:
+      - "192.168.2.0/24"
+    resource_group_name: lz0
+    hub_peering_enabled: true
