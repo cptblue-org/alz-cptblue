@@ -1,11 +1,11 @@
 module "enterprise_scale" {
   source  = "Azure/caf-enterprise-scale/azurerm"
-  version = "4.2.0"
+  version = "5.0.3"
 
   disable_telemetry = true
-
-  default_location = var.default_location
-  root_parent_id   = data.azurerm_client_config.core.tenant_id
+  library_path      = "${path.root}/lib"
+  default_location  = var.default_location
+  root_parent_id    = data.azurerm_client_config.core.tenant_id
 
   deploy_corp_landing_zones    = true
   deploy_online_landing_zones  = true
@@ -176,10 +176,14 @@ module "lz_vending" {
       {
         hub_network_resource_id         = local.hub_networks_by_location[each.value.location]
         hub_peering_use_remote_gateways = false
+        resource_group_lock_enabled     = false
       }
     )
   }
 }
+
+
+
 
 # data "azurerm_user_assigned_identity" "git_action_ci_id" {
 #   name                = "id-alz-cptblue-germanywestcentral-apply-001"
@@ -193,7 +197,7 @@ resource "azurerm_role_assignment" "git_action_ci_id" {
   for_each             = local.landing_zone_data_map
   scope                = format("/subscriptions/%s", each.value.subscription_id)
   role_definition_name = "Owner"
-  principal_id         = "f76ea6c8-9a5a-46d2-8a79-fcfac3062fea"
+  principal_id         = "f76ea6c8-9a5a-46d2-8a79-fcfac3062fea" # id-alz-cptblue-germanywestcentral-apply-001
 }
 
 # module "virtual_network_gateway" {
