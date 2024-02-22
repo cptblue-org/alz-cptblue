@@ -181,6 +181,21 @@ module "lz_vending" {
   }
 }
 
+# data "azurerm_user_assigned_identity" "git_action_ci_id" {
+#   name                = "id-alz-cptblue-germanywestcentral-apply-001"
+#   resource_group_name = "rg-alz-cptblue-identity-germanywestcentral-001"
+#   providers = {
+#     azurerm = azurerm.connectivity
+#   }
+# }
+
+resource "azurerm_role_assignment" "git_action_ci_id" {
+  for_each             = local.landing_zone_data_map
+  scope                = format("/subscriptions/%s", each.value.subscription_id)
+  role_definition_name = "Owner"
+  principal_id         = "f76ea6c8-9a5a-46d2-8a79-fcfac3062fea"
+}
+
 # module "virtual_network_gateway" {
 #   source  = "Azure/avm-ptn-vnetgateway/azurerm"
 #   version = "0.2.0"

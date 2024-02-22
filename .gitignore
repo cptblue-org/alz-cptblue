@@ -2,6 +2,7 @@ terraform.tf
 misc/*
 .env
 solutions/plattform/backend.hcl
+
 # Created by https://www.toptal.com/developers/gitignore/api/terraform
 # Edit at https://www.toptal.com/developers/gitignore?templates=terraform
 
@@ -35,7 +36,7 @@ override.tf.json
 # !example_override.tf
 
 # Include tfplan files to ignore the plan output of command: terraform plan -out=tfplan
-# example: *tfplan*
+*tfplan*
 
 # Ignore CLI configuration files
 .terraformrc
