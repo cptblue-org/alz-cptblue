@@ -193,7 +193,7 @@ resource "azurerm_role_assignment" "git_action_ci_id" {
   for_each             = local.landing_zone_data_map
   scope                = format("/subscriptions/%s", each.value.subscription_id)
   role_definition_name = "Owner"
-  principal_id         = "f76ea6c8-9a5a-46d2-8a79-fcfac3062fea" 
+  principal_id         = "f76ea6c8-9a5a-46d2-8a79-fcfac3062fea"
 }
 
 # module "virtual_network_gateway" {
