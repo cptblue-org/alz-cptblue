@@ -1,5 +1,5 @@
 {
-    "extend_es_online_landing_zones": {
+    "extend_es_online": {
       "policy_assignments": ["Deploy-Custom-Route-Table"],
       "policy_definitions": [],
       "policy_set_definitions": [],

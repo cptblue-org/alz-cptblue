@@ -140,6 +140,7 @@ terraform plan -out=tfplan-dine-assigment-rt-online
 git status
 # commit all your changes
 git add .
+git status
 git commit -m "dine-assigment-rt-online"
 git push --set-upstream origin dine-assigment-rt-online
 gh pr create --title "dine-assigment-rt-online" --body "dine-assigment-rt-online" --base main
