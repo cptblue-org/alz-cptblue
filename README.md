@@ -136,10 +136,12 @@ terraform init # because of lz vending module
 terraform fmt
 terraform validate
 terraform plan -out=tfplan-dine-assigment-rt-online
+terraform show tfplan-dine-assigment-rt-online
 # get current git status
 git status
 # commit all your changes
 git add .
+git status
 git commit -m "dine-assigment-rt-online"
 git push --set-upstream origin dine-assigment-rt-online
 gh pr create --title "dine-assigment-rt-online" --body "dine-assigment-rt-online" --base main

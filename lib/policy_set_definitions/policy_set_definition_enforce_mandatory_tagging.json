@@ -1,0 +1,49 @@
+{
+    "name": "Enforce-Mandatory-Tags",
+    "type": "Microsoft.Authorization/policySetDefinitions",
+    "apiVersion": "2021-06-01",
+    "scope": null,
+    "properties": {
+      "policyType": "Custom",
+      "displayName": "Ensure mandatory tagging is applied to subscriptions, and inherited to both Resources and Resource Groups",
+      "description": "Contains the core tagging policies applicable to the org",
+      "metadata": {
+        "version": "1.0.1",
+        "category": "Tags"
+      },
+      "parameters": {},
+      "policyDefinitions": [
+        {
+          "policyDefinitionReferenceId": "requiredTag-billingIdentifier",
+          "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/96d9a89c-0d67-41fc-899d-2b9599f76a24",
+          "metadata": {
+          "displayName": "Add tag billingIdentifier to subscriptions",
+          "description": "billingIdentifier tag should be set at subscription level"
+          },
+          "parameters": {
+            "tagName": {
+              "value": "billingIdentifier"
+            },
+            "tagValue": {
+              "value": "billingIdentifierMissing!PleaseClassify!"
+            }
+          },
+          "groupNames": [],
+          "nonComplianceMessages":  {
+        "message": "The tag billingIdentifier is required on a subscription, but not provided."
+    }
+        },
+        {
+          "policyDefinitionReferenceId": "inherit-requiredTag-billingIdentifier",
+          "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/b27a0cbd-a167-4dfa-ae64-4337be671140",
+          "parameters": {
+            "tagName": {
+              "value": "billingIdentifier"
+            }
+          },
+          "groupNames": []
+        }
+      ],
+      "policyDefinitionGroups": null
+    }
+  }
