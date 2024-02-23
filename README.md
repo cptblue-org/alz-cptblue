@@ -136,6 +136,7 @@ terraform init # because of lz vending module
 terraform fmt
 terraform validate
 terraform plan -out=tfplan-dine-assigment-rt-online
+terraform show tfplan-dine-assigment-rt-online
 # get current git status
 git status
 # commit all your changes
