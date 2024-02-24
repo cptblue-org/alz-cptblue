@@ -30,6 +30,21 @@ variable "root_name" {
   default     = "Enterprise-Scale"
 }
 
+variable "onprem_gateway_address" {
+  description = "The IP address for the onprem gateway ip_address"
+  type        = string
+}
+
+variable "onprem_shared_key" {
+  description = "The shared key for the onprem gateway|7|shared_key"
+  type        = string
+}
+
+variable "onprem_virtual_network_address_prefix" {
+  description = "The IP address range for the onprem network in CIDR format|7|cidr_range"
+  type        = string
+}
+
 variable "hub_virtual_network_address_prefix" {
   description = "The IP address range for the hub network in CIDR format|7|cidr_range"
   type        = string
@@ -41,7 +56,7 @@ variable "firewall_subnet_address_prefix" {
 }
 
 variable "firewall_management_subnet_address_prefix" {
-  description = "The IP address range for the firewall subnet in CIDR format|8|cidr_range"
+  description = "The IP address range for the basic firewall management subnet in CIDR format|8|cidr_range"
   type        = string
 }
 

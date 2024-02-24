@@ -214,7 +214,21 @@ module "virtual_network_gateway" {
   enable_telemetry                    = false
   virtual_network_name                = module.hubnetworking.virtual_networks["primary-hub"].name
   virtual_network_resource_group_name = "rg-connectivity-${var.default_location}"
+  local_network_gateways = {
+    onprem-lgw = {
+      name            = "onprem-lgw-${var.default_location}"
+      address_space   = [var.onprem_virtual_network_address_prefix]
+      gateway_address = var.onprem_gateway_address
+      connection = {
+        name                = "onprem-to-hub-${var.default_location}"
+        type                = "IPsec"
+        connection_protocol = "IKEv2"
+        enable_bgp          = false
+        shared_key          = var.onprem_shared_key
+      }
+    }
 
+  }
   providers = {
     azurerm = azurerm.connectivity
   }
