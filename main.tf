@@ -200,26 +200,26 @@ resource "azurerm_role_assignment" "git_action_ci_id" {
   principal_id         = "f76ea6c8-9a5a-46d2-8a79-fcfac3062fea" # id-alz-cptblue-germanywestcentral-apply-001
 }
 
-# module "virtual_network_gateway" {
-#   source  = "Azure/avm-ptn-vnetgateway/azurerm"
-#   version = "0.2.0"
+module "virtual_network_gateway" {
+  source  = "Azure/avm-ptn-vnetgateway/azurerm"
+  version = "0.2.0"
 
-#   count = var.virtual_network_gateway_creation_enabled ? 1 : 0
+  count = var.virtual_network_gateway_creation_enabled ? 1 : 0
 
-#   location                            = var.default_location
-#   name                                = "vgw-hub-${var.default_location}"
-#   sku                                 = "VpnGw1"
-#   subnet_address_prefix               = var.gateway_subnet_address_prefix
-#   type                                = "Vpn"
-#   enable_telemetry                    = false
-#   virtual_network_name                = module.hubnetworking.virtual_networks["primary-hub"].name
-#   virtual_network_resource_group_name = "rg-connectivity-${var.default_location}"
+  location                            = var.default_location
+  name                                = "vgw-hub-${var.default_location}"
+  sku                                 = "VpnGw1"
+  subnet_address_prefix               = var.gateway_subnet_address_prefix
+  type                                = "Vpn"
+  enable_telemetry                    = false
+  virtual_network_name                = module.hubnetworking.virtual_networks["primary-hub"].name
+  virtual_network_resource_group_name = "rg-connectivity-${var.default_location}"
 
-#   providers = {
-#     azurerm = azurerm.connectivity
-#   }
+  providers = {
+    azurerm = azurerm.connectivity
+  }
 
-#   depends_on = [
-#     module.hubnetworking
-#   ]
-# }
+  depends_on = [
+    module.hubnetworking
+  ]
+}
