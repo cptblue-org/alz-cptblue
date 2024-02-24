@@ -8,4 +8,4 @@ root_name                                 = "alz-cptblue-org"
 subscription_id_connectivity              = "7626c329-ebda-49e5-a5dd-d1ff10ec418a"
 subscription_id_identity                  = "49f84c41-45a8-4990-92f7-fdeaf4556179"
 subscription_id_management                = "ff73d2ad-1426-41ad-9c06-b98d6cb0bb56"
-virtual_network_gateway_creation_enabled  = false
+virtual_network_gateway_creation_enabled  = true
