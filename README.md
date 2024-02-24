@@ -38,37 +38,6 @@ gh pr create --title "change fw sku to basic" --body "Change the current az fw s
 
 Approve the pull request and merge it via the web interface.
 
-## Configure Hub DNS and Log Analytics
-
-### New branch dns-law-config
-
-~~~bash
-# show the current branch
-git branch --show-current # should be main
-# create branch to change fw sku
-git branch dns-law-config
-# switch to the new branch
-git checkout dns-law-config
-~~~
-
-Modify the main.tf file to change the firewall sku to basic.
-
-### Commit and Pull requewst via github cli
-
-~~~bash
-terraform fmt
-terraform validate
-terraform plan -out=tfplan-dns-law-config
-# get current git status
-git status
-# commit all your changes
-git add .
-git commit -m "dns-law-config"
-git push --set-upstream origin dns-law-config
-gh pr create --title "dns-law-config" --body "dns-law-config" --base main
-~~~
-
-Approve the pull request and merge it via the web interface.
 
 
 ## Create LZ0
@@ -83,8 +52,6 @@ git branch create-lz0
 # switch to the new branch
 git checkout create-lz0
 ~~~
-
-Modify the main.tf file to change the firewall sku to basic.
 
 ### Commit and Pull requewst via github cli
 
@@ -104,7 +71,7 @@ gh pr create --title "create-lz0" --body "create-lz0" --base main
 
 Approve the pull request and merge it via the web interface.
 
-## Assign RT DINE Policy to MG Online
+## Assign RT DINE Policy to MG Online (Work in progress)
 
 ### New branch dine-assigment-rt-online
 
