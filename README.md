@@ -71,6 +71,75 @@ gh pr create --title "create-lz0" --body "create-lz0" --base main
 
 Approve the pull request and merge it via the web interface.
 
+## Create VPN Gateway
+
+### New branch create-vpn-gateway   
+
+~~~bash
+# show the current branch
+git branch --show-current # should be main
+# create branch to change fw sku
+git branch create-vpn-gw
+# switch to the new branch
+git checkout create-vpn-gw
+~~~
+
+### Commit and Pull requewst via github cli
+
+~~~bash
+terraform fmt
+terraform validate
+terraform plan -out=tfplan-create-vpn-gw
+# get current git status
+git status
+# commit all your changes
+git add .
+git commit -m "create-vpn-gw"
+git push --set-upstream origin create-vpn-gw
+gh pr create --title "create-vpn-gw" --body "create-vpn-gw" --base main
+~~~
+
+Approve the pull request and merge it via the web interface.
+
+
+## Overwrite Policy NSG
+
+### New branch overwrite-policy-nsg   
+
+~~~bash
+# show the current branch
+git branch --show-current # should be main
+# create branch to change fw sku
+git branch overwrite-policy-nsg
+# switch to the new branch
+git checkout overwrite-policy-nsg
+~~~
+
+Modify the policy definition to overwrite the policy for NSG.
+
+~~~bash
+code ./locals.alz.tf
+code .terraform/modules/enterprise_scale/modules/archetypes/lib/policy_definitions/policy_definition_es_deny_subnet_without_nsg.json
+~~~
+
+### Commit and Pull requewst via github cli
+
+~~~bash
+terraform fmt
+terraform validate
+terraform plan -out=tfplan-overwrite-policy-nsg
+# get current git status
+git status
+# commit all your changes
+git add .
+git commit -m "overwrite-policy-nsg"
+git push --set-upstream origin overwrite-policy-nsg
+gh pr create --title "overwrite-policy-nsg" --body "overwrite-policy-nsg" --base main
+~~~
+
+Approve the pull request and merge it via the web interface.
+
+
 ## Assign RT DINE Policy to MG Online (Work in progress)
 
 ### New branch dine-assigment-rt-online

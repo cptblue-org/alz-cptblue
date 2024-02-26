@@ -200,26 +200,40 @@ resource "azurerm_role_assignment" "git_action_ci_id" {
   principal_id         = "f76ea6c8-9a5a-46d2-8a79-fcfac3062fea" # id-alz-cptblue-germanywestcentral-apply-001
 }
 
-# module "virtual_network_gateway" {
-#   source  = "Azure/avm-ptn-vnetgateway/azurerm"
-#   version = "0.2.0"
+module "virtual_network_gateway" {
+  source  = "Azure/avm-ptn-vnetgateway/azurerm"
+  version = "0.2.0"
 
-#   count = var.virtual_network_gateway_creation_enabled ? 1 : 0
+  count = var.virtual_network_gateway_creation_enabled ? 1 : 0
 
-#   location                            = var.default_location
-#   name                                = "vgw-hub-${var.default_location}"
-#   sku                                 = "VpnGw1"
-#   subnet_address_prefix               = var.gateway_subnet_address_prefix
-#   type                                = "Vpn"
-#   enable_telemetry                    = false
-#   virtual_network_name                = module.hubnetworking.virtual_networks["primary-hub"].name
-#   virtual_network_resource_group_name = "rg-connectivity-${var.default_location}"
+  location                            = var.default_location
+  name                                = "vgw-hub-${var.default_location}"
+  sku                                 = "VpnGw1"
+  subnet_address_prefix               = var.gateway_subnet_address_prefix
+  type                                = "Vpn"
+  enable_telemetry                    = false
+  virtual_network_name                = module.hubnetworking.virtual_networks["primary-hub"].name
+  virtual_network_resource_group_name = "rg-connectivity-${var.default_location}"
+  local_network_gateways = {
+    onprem-lgw = {
+      name            = "onprem-lgw-${var.default_location}"
+      address_space   = [var.onprem_virtual_network_address_prefix]
+      gateway_address = var.onprem_gateway_address
+      connection = {
+        name                = "onprem-to-hub-${var.default_location}"
+        type                = "IPsec"
+        connection_protocol = "IKEv2"
+        enable_bgp          = false
+        shared_key          = var.onprem_shared_key
+      }
+    }
 
-#   providers = {
-#     azurerm = azurerm.connectivity
-#   }
+  }
+  providers = {
+    azurerm = azurerm.connectivity
+  }
 
-#   depends_on = [
-#     module.hubnetworking
-#   ]
-# }
+  depends_on = [
+    module.hubnetworking
+  ]
+}
