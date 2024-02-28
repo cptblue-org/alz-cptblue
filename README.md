@@ -39,7 +39,12 @@ gh pr create --title "change fw sku to basic" --body "Change the current az fw s
 
 Approve the pull request and merge it via the web interface.
 
-
+~~~bash
+# switch back to main
+git checkout main
+# pull the changes from the remote main branch
+git pull
+~~~
 
 ## Create LZ0
 
@@ -72,6 +77,13 @@ gh pr create --title "create-lz0" --body "create-lz0" --base main
 
 Approve the pull request and merge it via the web interface.
 
+~~~bash
+# switch back to main
+git checkout main
+# pull the changes from the remote main branch
+git pull
+~~~
+
 ## Create VPN Gateway
 
 ### New branch create-vpn-gateway   
@@ -102,6 +114,12 @@ gh pr create --title "create-vpn-gw" --body "create-vpn-gw" --base main
 
 Approve the pull request and merge it via the web interface.
 
+~~~bash
+# switch back to main
+git checkout main
+# pull the changes from the remote main branch
+git pull
+~~~
 
 ## Overwrite Policy NSG
 
@@ -141,6 +159,12 @@ gh pr create --title "overwrite-policy-nsg" --body "overwrite-policy-nsg" --base
 
 Approve the pull request and merge it via the web interface.
 
+~~~bash
+# switch back to main
+git checkout main
+# pull the changes from the remote main branch
+git pull
+~~~
 
 ## Assign RT DINE Policy to MG Online (Work in progress)
 
@@ -186,6 +210,13 @@ gh pr create --title "dine-assigment-rt-online" --body "dine-assigment-rt-online
 ~~~
 
 Approve the pull request and merge it via the web interface.
+
+~~~bash
+# switch back to main
+git checkout main
+# pull the changes from the remote main branch
+git pull
+~~~
 
 # Misc
 
