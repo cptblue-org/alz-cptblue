@@ -3,6 +3,7 @@
 ~~~bash
 git status
 terraform init
+az login --use-device-code
 ~~~
 
 
@@ -115,7 +116,8 @@ git branch overwrite-policy-nsg
 git checkout overwrite-policy-nsg
 ~~~
 
-Modify the policy definition to overwrite the policy for NSG.
+- Modify the policy definition to overwrite the policy for NSG.
+- Add new Policy
 
 ~~~bash
 code ./locals.alz.tf
@@ -192,6 +194,9 @@ Approve the pull request and merge it via the web interface.
 We are going to provide some secretes and variables via the github build in secrets and variables feature.
 > NOTE: If it comes to secret, this is a best practices, but I am unsure if variable should go into github. It would be better to keep them all at one place. Maybe the bicep parameter files are a better place. But in this case we would need to store resource ids in clear text.
 ~~~bash
+# create private github repo
+gh repo create alz-cptblue --private
+
 # create github secret via gh cli for repo cptdazlz
 gh secret set AZURE_CLIENT_ID -b $appid -e production
 tid=$(az account show --query tenantId -o tsv)

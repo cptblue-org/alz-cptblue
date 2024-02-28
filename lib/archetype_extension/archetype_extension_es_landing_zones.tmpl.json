@@ -6,8 +6,8 @@
     "role_definitions": [],
     "archetype_config": {
       "parameters": {
-        "Deny-Resource-Locations": {
-          "listOfAllowedLocations": ["eastus", "westus"]
+        "Deny-Subnet-Without-Nsg": {
+          "effect": "Audit"
         }
       },
       "access_control": {}
